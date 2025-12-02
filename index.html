@@ -82,8 +82,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 relative z-10 flex-grow">
       
       <div class="text-center mb-12 max-w-4xl mx-auto pt-8">
-        
-      
         <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-bold tracking-wide shadow-sm">
           🚀 Inscrições Abertas
         </div>
@@ -102,13 +100,14 @@
         </div>
       </div>
 
-      <!-- Ajuste: items-center no mobile, lg:items-start no desktop -->
+      <!-- Layout Flexível -->
       <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
         
         <!-- Grid de Matérias -->
         <div class="flex-1 w-full max-w-md lg:max-w-none">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
             
+            <!-- Cards das Áreas -->
             <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-indigo-500" data-area="Matemática">
               <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
@@ -213,7 +212,7 @@
               </div>
             </div>
 
-            <!-- Card de Artes (NOVO) -->
+            <!-- Card de Artes -->
             <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-pink-500" data-area="Artes">
               <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
@@ -258,7 +257,7 @@
                   placeholder="seu.email@brightbee.com.br">
               </div>
 
-              <!-- NOVO CAMPO: TURMA -->
+              <!-- Campo Turma -->
               <div>
                 <label for="class-select" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Turma</label>
                 <div class="relative">
@@ -281,6 +280,7 @@
                 </div>
               </div>
               
+              <!-- Campo Área -->
               <div>
                 <label for="knowledge-area" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Área de conhecimento</label>
                 <div class="relative">
@@ -303,7 +303,7 @@
         </div>
       </div>
 
-      
+      <!-- Rodapé -->
       <footer class="mt-8 py-4 border-t border-white/20 relative z-10 text-center">
         <p class="text-white/80 text-xs font-medium">
           © 2026 Bright Bee School. Conectando o futuro.
@@ -358,7 +358,6 @@
             }
         } catch (error) {
             console.error("Erro na sincronização:", error);
-            // Em caso de erro de rede, mantemos os dados anteriores para não quebrar a UI
         } finally {
             isFetching = false;
         }
@@ -375,7 +374,6 @@
         const countEl = card.querySelector('.area-count');
         if(countEl) countEl.textContent = remaining;
 
-        // Lógica visual para esgotado
         if (remaining === 0) {
           card.classList.add('opacity-60', 'grayscale');
           card.style.borderLeftColor = '#ef4444';
@@ -416,7 +414,7 @@
           const option = options[i];
           const area = option.value;
           
-          if (!area) continue; // Pula a opção placeholder
+          if (!area) continue; 
 
           const taken = currentCounts[area] || 0;
           const remaining = Math.max(0, LIMIT_PER_AREA - taken);
@@ -424,8 +422,6 @@
           if (remaining === 0) {
               option.text = `${area} (Esgotada)`;
               option.disabled = true;
-              // Se a opção selecionada ficou esgotada, limpamos a seleção? 
-              // Melhor não forçar para não confundir, o backend vai barrar.
           } else {
               option.text = area;
               option.disabled = false;
@@ -433,7 +429,6 @@
       }
     }
 
-    // Cria o esqueleto inicial do select
     function populateInitialSelect() {
        const select = document.getElementById('knowledge-area');
        select.innerHTML = '<option value="">Carregando vagas...</option>';
@@ -461,7 +456,6 @@
       const submitBtn = document.getElementById('submit-btn');
       const emailInput = document.getElementById('email');
       
-      // Validação de Frontend do Email
       if (!emailInput.value.trim().toLowerCase().endsWith(ALLOWED_DOMAIN)) {
         showToast(`Use um email ${ALLOWED_DOMAIN}`, true);
         emailInput.focus();
@@ -500,7 +494,6 @@
         if (result.status === 'success') {
           showToast(result.message);
           document.getElementById('registration-form').reset();
-          // Força uma atualização imediata após sucesso
           fetchData();
         } else {
           showToast(result.message, true);
@@ -516,7 +509,6 @@
       }
     });
 
-    // Inicia a aplicação
     startApp();
   </script>
 </body>
