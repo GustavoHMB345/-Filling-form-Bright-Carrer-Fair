@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright Career Fair 2026</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap)" rel="stylesheet">
+
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .bg-pattern {
+      background-color: #FFA832;
+      background-image: linear-gradient(135deg, #FFA832 0%, #FF6B35 100%);
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translate(-50%, -20px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+    
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .area-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .area-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+    }
+    
+    /* Loading overlay */
+    #loading-overlay {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+</head>
+
+<body class="w-full min-h-full bg-orange-50">
+  
+  <div class="w-full min-h-screen bg-pattern relative overflow-hidden flex flex-col">
+    
+    <!-- Efeitos de Fundo -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
+        <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-yellow-300 blur-3xl mix-blend-overlay"></div>
+        <div class="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-red-500 blur-3xl mix-blend-multiply opacity-50"></div>
+        <div class="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-orange-200 blur-3xl mix-blend-overlay"></div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 relative z-10 flex-grow">
+      
+      <div class="text-center mb-12 max-w-4xl mx-auto pt-8">
+        <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-bold tracking-wide shadow-sm">
+          🚀 Inscrições Abertas
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md">
+          Bright Career Fair 2026
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
+          Conectando talentos ao futuro profissional
+        </p>
+
+        <div class="mt-8 lg:hidden animate-bounce">
+          <a href="#form-anchor" class="inline-flex items-center gap-2 bg-white text-orange-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-50 transition transform active:scale-95">
+            <span>👇</span>
+            <span>Ir para a Inscrição</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-8 items-start">
+        
+        <!-- Grid de Matérias -->
+        <div class="flex-1">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
+            
+            <!-- Cards gerados dinamicamente ou estáticos com IDs para atualização -->
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-indigo-500" data-area="Matemática">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-indigo-50 text-2xl flex items-center justify-center group-hover:bg-indigo-100 transition-colors">📐</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Matemática</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-amber-500" data-area="Português">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-amber-50 text-2xl flex items-center justify-center group-hover:bg-amber-100 transition-colors">📚</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Português</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-rose-500" data-area="Inglês">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-rose-50 text-2xl flex items-center justify-center group-hover:bg-rose-100 transition-colors">🗣️</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Inglês</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-emerald-500" data-area="Ciências/ Biologia">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-emerald-50 text-2xl flex items-center justify-center group-hover:bg-emerald-100 transition-colors">🧬</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Ciências/ Biologia</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-purple-500" data-area="Química">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-purple-50 text-2xl flex items-center justify-center group-hover:bg-purple-100 transition-colors">🧪</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Química</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-cyan-500" data-area="Física">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-cyan-50 text-2xl flex items-center justify-center group-hover:bg-cyan-100 transition-colors">⚛️</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Física</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-yellow-600" data-area="História">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-yellow-50 text-2xl flex items-center justify-center group-hover:bg-yellow-100 transition-colors">🏛️</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">História</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-blue-500" data-area="Geografia">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-blue-50 text-2xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">🌍</div>
+                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Geografia</h3>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
+                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Formulário -->
+        <div id="form-anchor" class="lg:w-[400px] xl:w-[450px] lg:sticky lg:top-8 scroll-mt-24">
+          <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/50 relative overflow-hidden">
+            
+            <!-- Loading Indicator Overlay -->
+            <div id="loading-overlay" class="absolute inset-0 z-50 hidden flex-col items-center justify-center rounded-3xl">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mb-4"></div>
+                <p class="text-orange-600 font-bold animate-pulse">Processando...</p>
+            </div>
+
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-2 mt-2">Faça sua inscrição</h2>
+            <p class="text-gray-500 mb-8 text-sm">Preencha os dados abaixo para reservar sua vaga.</p>
+            
+            <form id="registration-form" class="space-y-5">
+              <div>
+                <label for="student-name" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Nome completo</label>
+                <input type="text" id="student-name" name="name" required 
+                  class="w-full px-5 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none transition-all duration-200 placeholder-gray-400 font-medium text-gray-800" 
+                  placeholder="Seu nome completo">
+              </div>
+              
+              <div>
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Email</label>
+                <input type="email" id="email" name="email" required 
+                  class="w-full px-5 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none transition-all duration-200 placeholder-gray-400 font-medium text-gray-800" 
+                  placeholder="seu.email@exemplo.com">
+              </div>
+              
+              <div>
+                <label for="knowledge-area" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Área de conhecimento</label>
+                <div class="relative">
+                  <select id="knowledge-area" name="area" required 
+                    class="w-full px-5 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none transition-all duration-200 appearance-none cursor-pointer font-medium text-gray-800">
+                    <option value="">Carregando vagas...</option>
+                    <!-- Opções serão preenchidas dinamicamente -->
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                    <svg class="fill-current h-4 w-4" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" id="submit-btn" 
+                class="w-full mt-4 bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-orange-500/30 transform active:scale-[0.98] flex items-center justify-center gap-2">
+                <span id="submit-button-text">Confirmar inscrição</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé (Footer) com Logo -->
+      <footer class="mt-8 py-4 border-t border-white/20 relative z-10 text-center">
+        <div class="flex justify-center mb-2">
+          <img src="logo.jpg" 
+               onerror="this.style.display='none';"
+               alt="Logo Bright Bee School" 
+               class="w-auto h-12 md:h-16 object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-white/80 text-xs font-medium">
+          © 2026 Bright Bee School. Conectando o futuro.
+        </p>
+      </footer>
+
+    </div>
+  </div>
+
+  <div id="toast" class="hidden toast-container shadow-2xl"></div>
+
+  <script>
+    // ******************************************************
+    // CONFIGURAÇÃO DO BACKEND - COLE SUA URL AQUI
+    // ******************************************************
+    const SCRIPT_URL = "COLE_A_URL_DO_GOOGLE_APPS_SCRIPT_AQUI"; 
+    // ******************************************************
+
+    const LIMIT_PER_AREA = 20;
+    const VALID_AREAS = [
+      'Matemática', 'Português', 'Inglês', 'Ciências/ Biologia',
+      'Química', 'Física', 'História', 'Geografia'
+    ];
+
+    let currentCounts = {};
+
+    // 1. Inicialização: Busca dados do Google Sheets
+    async function init() {
+      // Preenche o select inicialmente
+      populateSelect();
+      
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=getCounts`);
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          currentCounts = result.data;
+          updateUI();
+        } else {
+          showToast('Erro ao carregar vagas.', true);
+        }
+      } catch (error) {
+        console.error("Erro na inicialização:", error);
+        // Fallback: Se der erro, assume 0 inscritos para permitir a UI funcionar (o backend valida no submit)
+        VALID_AREAS.forEach(area => currentCounts[area] = 0);
+        updateUI();
+      }
+    }
+
+    // 2. Atualiza Cards e Select
+    function updateUI() {
+      // Atualiza Cards
+      document.querySelectorAll('.area-card').forEach(card => {
+        const area = card.dataset.area;
+        const taken = currentCounts[area] || 0;
+        const remaining = Math.max(0, LIMIT_PER_AREA - taken);
+        
+        const countEl = card.querySelector('.area-count');
+        if(countEl) countEl.textContent = remaining;
+
+        if (remaining === 0) {
+          card.classList.add('opacity-60', 'grayscale');
+          card.style.borderLeftColor = '#ef4444';
+          countEl.style.color = '#ef4444';
+          
+          if (!card.querySelector('.filled-badge')) {
+            const badge = document.createElement('div');
+            badge.className = 'filled-badge mt-3 bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold text-center border border-red-200 uppercase tracking-wide';
+            badge.innerHTML = 'Esgotado';
+            card.appendChild(badge);
+          }
+        } else {
+          card.classList.remove('opacity-60', 'grayscale');
+          card.style.borderLeftColor = 'transparent';
+          countEl.style.color = '#1f2937';
+          const badge = card.querySelector('.filled-badge');
+          if (badge) badge.remove();
+        }
+      });
+
+      // Atualiza Select
+      const select = document.getElementById('knowledge-area');
+      const currentVal = select.value;
+      
+      // Limpa opções antigas exceto a primeira se for placeholder
+      select.innerHTML = '<option value="">Selecione uma área</option>';
+      
+      VALID_AREAS.forEach(area => {
+        const taken = currentCounts[area] || 0;
+        const remaining = Math.max(0, LIMIT_PER_AREA - taken);
+        const option = document.createElement('option');
+        option.value = area;
+        
+        if (remaining === 0) {
+          option.textContent = `${area} (Esgotada)`;
+          option.disabled = true;
+        } else {
+          option.textContent = area;
+        }
+        select.appendChild(option);
+      });
+      
+      select.value = currentVal;
+    }
+
+    function populateSelect() {
+       const select = document.getElementById('knowledge-area');
+       select.innerHTML = '<option value="">Carregando...</option>';
+    }
+
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.innerHTML = `
+        <div class="bg-white border-l-4 ${isError ? 'border-red-500' : 'border-green-500'} rounded-r-lg p-4 flex items-center shadow-lg">
+            <div class="mr-3 text-2xl">${isError ? '🚫' : '✅'}</div>
+            <div>
+                <p class="font-bold text-gray-800">${isError ? 'Erro' : 'Sucesso'}</p>
+                <p class="text-sm text-gray-600">${message}</p>
+            </div>
+        </div>
+      `;
+      toast.className = 'toast-container block';
+      setTimeout(() => { toast.className = 'hidden toast-container'; }, 5000);
+    }
+
+    // 3. Envio do Formulário
+    document.getElementById('registration-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const overlay = document.getElementById('loading-overlay');
+      const submitBtn = document.getElementById('submit-btn');
+      
+      const formData = {
+        name: document.getElementById('student-name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        area: document.getElementById('knowledge-area').value
+      };
+
+      if (!formData.area) {
+        showToast('Selecione uma área válida.', true);
+        return;
+      }
+
+      // UI Loading
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          showToast(result.message);
+          document.getElementById('registration-form').reset();
+          // Atualiza contadores após sucesso
+          init();
+        } else {
+          showToast(result.message, true);
+        }
+
+      } catch (error) {
+        showToast('Erro de conexão. Tente novamente.', true);
+        console.error(error);
+      } finally {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Inicia a aplicação
+    init();
+  </script>
+</body>
+</html>
