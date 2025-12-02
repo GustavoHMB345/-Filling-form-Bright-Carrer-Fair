@@ -6,12 +6,12 @@
   <title>Bright Career Fair 2026</title>
   
   <!-- Tailwind CSS -->
-  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Fonts -->
-  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-  <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap)" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -106,7 +106,6 @@
         <div class="flex-1">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
             
-            <!-- Cards gerados dinamicamente ou estáticos com IDs para atualização -->
             <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-indigo-500" data-area="Matemática">
               <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
@@ -218,7 +217,7 @@
         <div id="form-anchor" class="lg:w-[400px] xl:w-[450px] lg:sticky lg:top-8 scroll-mt-24">
           <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/50 relative overflow-hidden">
             
-            <!-- Loading Indicator Overlay -->
+            <!-- Loading Indicator -->
             <div id="loading-overlay" class="absolute inset-0 z-50 hidden flex-col items-center justify-center rounded-3xl">
                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mb-4"></div>
                 <p class="text-orange-600 font-bold animate-pulse">Processando...</p>
@@ -236,10 +235,33 @@
               </div>
               
               <div>
-                <label for="email" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Email</label>
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Email (@brightbee.com.br)</label>
                 <input type="email" id="email" name="email" required 
                   class="w-full px-5 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none transition-all duration-200 placeholder-gray-400 font-medium text-gray-800" 
-                  placeholder="seu.email@exemplo.com">
+                  placeholder="seu.email@brightbee.com.br">
+              </div>
+
+              <!-- NOVO CAMPO: TURMA -->
+              <div>
+                <label for="class-select" class="block text-gray-700 text-sm font-bold mb-2 ml-1">Turma</label>
+                <div class="relative">
+                  <select id="class-select" name="class_name" required 
+                    class="w-full px-5 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none transition-all duration-200 appearance-none cursor-pointer font-medium text-gray-800">
+                    <option value="">Selecione sua turma</option>
+                    <option value="G6M1">G6M1</option>
+                    <option value="G6M2">G6M2</option>
+                    <option value="G6M3">G6M3</option>
+                    <option value="G7M1">G7M1</option>
+                    <option value="G7M2">G7M2</option>
+                    <option value="G8M1">G8M1</option>
+                    <option value="G8M2">G8M2</option>
+                    <option value="G9M1">G9M1</option>
+                    <option value="G9M2">G9M2</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                  </div>
+                </div>
               </div>
               
               <div>
@@ -248,10 +270,9 @@
                   <select id="knowledge-area" name="area" required 
                     class="w-full px-5 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none transition-all duration-200 appearance-none cursor-pointer font-medium text-gray-800">
                     <option value="">Carregando vagas...</option>
-                    <!-- Opções serão preenchidas dinamicamente -->
                   </select>
                   <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                    <svg class="fill-current h-4 w-4" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                   </div>
                 </div>
               </div>
@@ -265,13 +286,13 @@
         </div>
       </div>
 
-      <!-- Rodapé (Footer) com Logo -->
+      <!-- Rodapé com Logo (Restaurado) -->
       <footer class="mt-8 py-4 border-t border-white/20 relative z-10 text-center">
         <div class="flex justify-center mb-2">
           <img src="logo.jpg" 
-               onerror="this.style.display='none';"
+               onerror="this.style.display='none'; alert('Certifique-se de que o arquivo se chama logo.jpg');"
                alt="Logo Bright Bee School" 
-               class="w-auto h-12 md:h-16 object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300">
+               class="w-auto h-16 md:h-20 object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300">
         </div>
         <p class="text-white/80 text-xs font-medium">
           © 2026 Bright Bee School. Conectando o futuro.
@@ -285,12 +306,13 @@
 
   <script>
     // ******************************************************
-    // CONFIGURAÇÃO DO BACKEND - COLE SUA URL AQUI
+    // CONFIGURAÇÃO DO BACKEND
     // ******************************************************
-    const SCRIPT_URL = "COLE_A_URL_DO_GOOGLE_APPS_SCRIPT_AQUI"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhBE9k5heO2fU-97crX4ruTalQqf9JWx3GYoJe3RPUht-VTo4vLQzDlX1Erfn-zETGgQ/exec"; 
     // ******************************************************
 
     const LIMIT_PER_AREA = 20;
+    const ALLOWED_DOMAIN = "@brightbee.com.br";
     const VALID_AREAS = [
       'Matemática', 'Português', 'Inglês', 'Ciências/ Biologia',
       'Química', 'Física', 'História', 'Geografia'
@@ -298,11 +320,8 @@
 
     let currentCounts = {};
 
-    // 1. Inicialização: Busca dados do Google Sheets
     async function init() {
-      // Preenche o select inicialmente
       populateSelect();
-      
       try {
         const response = await fetch(`${SCRIPT_URL}?action=getCounts`);
         const result = await response.json();
@@ -315,15 +334,12 @@
         }
       } catch (error) {
         console.error("Erro na inicialização:", error);
-        // Fallback: Se der erro, assume 0 inscritos para permitir a UI funcionar (o backend valida no submit)
         VALID_AREAS.forEach(area => currentCounts[area] = 0);
         updateUI();
       }
     }
 
-    // 2. Atualiza Cards e Select
     function updateUI() {
-      // Atualiza Cards
       document.querySelectorAll('.area-card').forEach(card => {
         const area = card.dataset.area;
         const taken = currentCounts[area] || 0;
@@ -352,11 +368,9 @@
         }
       });
 
-      // Atualiza Select
       const select = document.getElementById('knowledge-area');
       const currentVal = select.value;
       
-      // Limpa opções antigas exceto a primeira se for placeholder
       select.innerHTML = '<option value="">Selecione uma área</option>';
       
       VALID_AREAS.forEach(area => {
@@ -397,25 +411,37 @@
       setTimeout(() => { toast.className = 'hidden toast-container'; }, 5000);
     }
 
-    // 3. Envio do Formulário
     document.getElementById('registration-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const overlay = document.getElementById('loading-overlay');
       const submitBtn = document.getElementById('submit-btn');
+      const emailInput = document.getElementById('email');
       
+      // Validação de Frontend do Email
+      if (!emailInput.value.trim().toLowerCase().endsWith(ALLOWED_DOMAIN)) {
+        showToast(`Use um email ${ALLOWED_DOMAIN}`, true);
+        emailInput.focus();
+        return;
+      }
+
       const formData = {
         name: document.getElementById('student-name').value.trim(),
-        email: document.getElementById('email').value.trim(),
+        email: emailInput.value.trim(),
+        class_name: document.getElementById('class-select').value,
         area: document.getElementById('knowledge-area').value
       };
+
+      if (!formData.class_name) {
+        showToast('Selecione sua turma.', true);
+        return;
+      }
 
       if (!formData.area) {
         showToast('Selecione uma área válida.', true);
         return;
       }
 
-      // UI Loading
       overlay.classList.remove('hidden');
       overlay.classList.add('flex');
       submitBtn.disabled = true;
@@ -431,7 +457,6 @@
         if (result.status === 'success') {
           showToast(result.message);
           document.getElementById('registration-form').reset();
-          // Atualiza contadores após sucesso
           init();
         } else {
           showToast(result.message, true);
@@ -447,7 +472,6 @@
       }
     });
 
-    // Inicia a aplicação
     init();
   </script>
 </body>
