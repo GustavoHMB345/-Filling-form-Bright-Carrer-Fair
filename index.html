@@ -100,10 +100,12 @@
         </div>
       </div>
 
-      <div class="flex flex-col lg:flex-row gap-8 items-start">
+      <!-- Ajuste: items-center no mobile, lg:items-start no desktop -->
+      <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
         
         <!-- Grid de Matérias -->
-        <div class="flex-1">
+        <!-- Ajuste: w-full max-w-md no mobile para centralizar cards -->
+        <div class="flex-1 w-full max-w-md lg:max-w-none">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
             
             <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-indigo-500" data-area="Matemática">
@@ -214,7 +216,8 @@
         </div>
 
         <!-- Formulário -->
-        <div id="form-anchor" class="lg:w-[400px] xl:w-[450px] lg:sticky lg:top-8 scroll-mt-24">
+        <!-- Ajuste: w-full max-w-md no mobile para centralizar -->
+        <div id="form-anchor" class="w-full max-w-md lg:max-w-none lg:w-[400px] xl:w-[450px] lg:sticky lg:top-8 scroll-mt-24">
           <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/50 relative overflow-hidden">
             
             <!-- Loading Indicator -->
@@ -302,7 +305,7 @@
     // ******************************************************
     // CONFIGURAÇÃO DO BACKEND
     // ******************************************************
-    const SCRIPT_URL = "COLE_A_URL_DO_GOOGLE_APPS_SCRIPT_AQUI"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhBE9k5heO2fU-97crX4ruTalQqf9JWx3GYoJe3RPUht-VTo4vLQzDlX1Erfn-zETGgQ/exec"; 
     // ******************************************************
 
     const LIMIT_PER_AREA = 20;
@@ -313,27 +316,43 @@
     ];
 
     let currentCounts = {};
+    let isFetching = false;
 
-    async function init() {
-      populateSelect();
-      try {
-        const response = await fetch(`${SCRIPT_URL}?action=getCounts`);
-        const result = await response.json();
+    // Função principal que inicializa e inicia o polling
+    async function startApp() {
+        populateInitialSelect();
         
-        if (result.status === 'success') {
-          currentCounts = result.data;
-          updateUI();
-        } else {
-          showToast('Erro ao carregar vagas.', true);
-        }
-      } catch (error) {
-        console.error("Erro na inicialização:", error);
-        VALID_AREAS.forEach(area => currentCounts[area] = 0);
-        updateUI();
-      }
+        // Faz a primeira busca imediatamente
+        await fetchData();
+        
+        // Configura a verificação periódica a cada 5 segundos
+        setInterval(fetchData, 5000);
     }
 
+    // Função dedicada para buscar os dados
+    async function fetchData() {
+        if(isFetching) return;
+        isFetching = true;
+
+        try {
+            const response = await fetch(`${SCRIPT_URL}?action=getCounts`);
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                currentCounts = result.data;
+                updateUI();
+            }
+        } catch (error) {
+            console.error("Erro na sincronização:", error);
+            // Em caso de erro de rede, mantemos os dados anteriores para não quebrar a UI
+        } finally {
+            isFetching = false;
+        }
+    }
+
+    // Função que atualiza a interface sem reconstruir elementos
     function updateUI() {
+      // 1. Atualizar Cards
       document.querySelectorAll('.area-card').forEach(card => {
         const area = card.dataset.area;
         const taken = currentCounts[area] || 0;
@@ -342,6 +361,7 @@
         const countEl = card.querySelector('.area-count');
         if(countEl) countEl.textContent = remaining;
 
+        // Lógica visual para esgotado
         if (remaining === 0) {
           card.classList.add('opacity-60', 'grayscale');
           card.style.borderLeftColor = '#ef4444';
@@ -362,32 +382,47 @@
         }
       });
 
+      // 2. Atualizar Select (Dropdown) sem destruir a seleção atual
       const select = document.getElementById('knowledge-area');
-      const currentVal = select.value;
-      
-      select.innerHTML = '<option value="">Selecione uma área</option>';
-      
-      VALID_AREAS.forEach(area => {
-        const taken = currentCounts[area] || 0;
-        const remaining = Math.max(0, LIMIT_PER_AREA - taken);
-        const option = document.createElement('option');
-        option.value = area;
-        
-        if (remaining === 0) {
-          option.textContent = `${area} (Esgotada)`;
-          option.disabled = true;
-        } else {
-          option.textContent = area;
-        }
-        select.appendChild(option);
-      });
-      
-      select.value = currentVal;
+      const options = select.options;
+
+      // Se o select ainda tiver "Carregando...", reconstruímos ele
+      if (options.length > 0 && options[0].text === "Carregando vagas...") {
+          select.innerHTML = '<option value="">Selecione uma área</option>';
+          VALID_AREAS.forEach(area => {
+              const option = document.createElement('option');
+              option.value = area;
+              option.text = area;
+              select.appendChild(option);
+          });
+      }
+
+      // Agora atualizamos o estado de cada opção existente
+      for (let i = 0; i < options.length; i++) {
+          const option = options[i];
+          const area = option.value;
+          
+          if (!area) continue; // Pula a opção placeholder
+
+          const taken = currentCounts[area] || 0;
+          const remaining = Math.max(0, LIMIT_PER_AREA - taken);
+
+          if (remaining === 0) {
+              option.text = `${area} (Esgotada)`;
+              option.disabled = true;
+              // Se a opção selecionada ficou esgotada, limpamos a seleção? 
+              // Melhor não forçar para não confundir, o backend vai barrar.
+          } else {
+              option.text = area;
+              option.disabled = false;
+          }
+      }
     }
 
-    function populateSelect() {
+    // Cria o esqueleto inicial do select
+    function populateInitialSelect() {
        const select = document.getElementById('knowledge-area');
-       select.innerHTML = '<option value="">Carregando...</option>';
+       select.innerHTML = '<option value="">Carregando vagas...</option>';
     }
 
     function showToast(message, isError = false) {
@@ -451,7 +486,8 @@
         if (result.status === 'success') {
           showToast(result.message);
           document.getElementById('registration-form').reset();
-          init();
+          // Força uma atualização imediata após sucesso
+          fetchData();
         } else {
           showToast(result.message, true);
         }
@@ -466,7 +502,8 @@
       }
     });
 
-    init();
+    // Inicia a aplicação
+    startApp();
   </script>
 </body>
 </html>
