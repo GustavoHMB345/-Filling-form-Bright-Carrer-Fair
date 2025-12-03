@@ -89,7 +89,7 @@
           Bright Career Fair 2026
         </h1>
         <p class="text-xl md:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
-          Global challenges, smart solutions.
+          Global challenges, smart solutions.
         </p>
 
         <div class="mt-8 lg:hidden animate-bounce">
@@ -303,10 +303,13 @@
         </div>
       </div>
 
-      <!-- Rodapé -->
+      <!-- Rodapé com Crédito -->
       <footer class="mt-8 py-4 border-t border-white/20 relative z-10 text-center">
         <p class="text-white/80 text-xs font-medium">
           © 2026 Bright Bee School. Conectando o futuro.
+        </p>
+        <p class="text-white/50 text-[10px] mt-1 font-light tracking-wide uppercase">
+          Desenvolvido por Informática Bright Bee School
         </p>
       </footer>
 
@@ -374,6 +377,7 @@
         const countEl = card.querySelector('.area-count');
         if(countEl) countEl.textContent = remaining;
 
+        // Lógica visual para esgotado
         if (remaining === 0) {
           card.classList.add('opacity-60', 'grayscale');
           card.style.borderLeftColor = '#ef4444';
