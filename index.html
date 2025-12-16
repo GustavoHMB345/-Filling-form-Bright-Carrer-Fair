@@ -121,18 +121,7 @@
               </div>
             </div>
 
-            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-amber-500" data-area="Português">
-              <div class="flex items-start justify-between mb-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-12 h-12 rounded-xl bg-amber-50 text-2xl flex items-center justify-center group-hover:bg-amber-100 transition-colors">📚</div>
-                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Português</h3>
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
-                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
-              </div>
-            </div>
+            <!-- Português Removido -->
 
             <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-rose-500" data-area="Inglês">
               <div class="flex items-start justify-between mb-4">
@@ -212,19 +201,7 @@
               </div>
             </div>
 
-            <!-- Card de Artes -->
-            <div class="area-card group bg-white rounded-2xl p-6 shadow-xl border-l-4 border-transparent hover:border-pink-500" data-area="Artes">
-              <div class="flex items-start justify-between mb-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-12 h-12 rounded-xl bg-pink-50 text-2xl flex items-center justify-center group-hover:bg-pink-100 transition-colors">🎨</div>
-                  <h3 class="text-xl font-bold text-gray-800 tracking-tight">Artes</h3>
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                 <span class="text-gray-500 text-sm font-semibold uppercase tracking-wider">Vagas</span>
-                 <span class="area-count text-4xl font-extrabold text-gray-800">--</span>
-              </div>
-            </div>
+            <!-- Artes Removido -->
 
           </div>
         </div>
@@ -327,9 +304,10 @@
 
     const LIMIT_PER_AREA = 20;
     const ALLOWED_DOMAIN = "@brightbee.com.br";
+    // Atualizei a lista removendo Português e Artes
     const VALID_AREAS = [
-      'Matemática', 'Português', 'Inglês', 'Ciências/ Biologia',
-      'Química', 'Física', 'História', 'Geografia', 'Artes'
+      'Matemática', 'Inglês', 'Ciências/ Biologia',
+      'Química', 'Física', 'História', 'Geografia'
     ];
 
     let currentCounts = {};
